@@ -27,30 +27,6 @@ export const skills = [
   "Accessibility",
 ] as const;
 
-export const projects = [
-  {
-    name: "Air Visual Clone",
-    description:
-      "A TypeScript recreation of an air-quality dashboard with responsive charts and live data views.",
-    href: "https://github.com/manish-pamnani/air-visual-clone",
-    tags: ["TypeScript", "React"],
-  },
-  {
-    name: "Angular PWA",
-    description:
-      "A progressive web app scaffold with offline support and installable shell patterns.",
-    href: "https://github.com/manish-pamnani/angular-pwa",
-    tags: ["Angular", "PWA"],
-  },
-  {
-    name: "Responsive Navigation Bar",
-    description:
-      "A mobile-first navigation component with accessible keyboard and touch interactions.",
-    href: "https://github.com/manish-pamnani/responsive-navigation-bar",
-    tags: ["TypeScript", "CSS"],
-  },
-] as const;
-
 export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",

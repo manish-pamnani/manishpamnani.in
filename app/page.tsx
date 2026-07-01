@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteLogo } from "@/components/site-logo";
-import { personSchema, projects, site, skills } from "@/lib/site";
+import { formatBlogDate, getBlogPosts } from "@/lib/blog";
+import { personSchema, site, skills } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: site.pageTitle,
@@ -22,6 +23,8 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const blogPosts = getBlogPosts();
+
   return (
     <>
       <script
@@ -124,42 +127,56 @@ export default function Home() {
             </ul>
           </section>
 
-          <section aria-labelledby="projects-heading">
+          <section aria-labelledby="blog-heading">
             <h2
-              id="projects-heading"
+              id="blog-heading"
               className="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400"
             >
-              Projects
+              Blog
             </h2>
-            <ul className="mt-4 divide-y divide-zinc-200 dark:divide-zinc-800">
-              {projects.map((project) => (
-                <li key={project.name} className="py-6 first:pt-0 last:pb-0">
-                  <a
-                    href={project.href}
-                    className="group block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <h3 className="text-lg font-medium text-zinc-950 group-hover:underline dark:text-zinc-50">
-                      {project.name}
-                    </h3>
-                    <p className="mt-2 text-base leading-7 text-zinc-600 dark:text-zinc-400">
-                      {project.description}
-                    </p>
-                    <ul className="mt-3 flex flex-wrap gap-2" aria-label="Technologies">
-                      {project.tags.map((tag) => (
-                        <li
-                          key={tag}
-                          className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
+            {blogPosts.length > 0 ? (
+              <ul className="mt-4 divide-y divide-zinc-200 dark:divide-zinc-800">
+                {blogPosts.map((post) => (
+                  <li key={post.slug} className="py-6 first:pt-0 last:pb-0">
+                    <a href={post.href} className="group block">
+                      <time
+                        dateTime={post.date.toISOString().slice(0, 10)}
+                        className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
+                      >
+                        {formatBlogDate(post.date)}
+                      </time>
+                      <h3 className="mt-2 text-lg font-medium text-zinc-950 group-hover:underline dark:text-zinc-50">
+                        {post.title}
+                      </h3>
+                      {post.description ? (
+                        <p className="mt-2 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+                          {post.description}
+                        </p>
+                      ) : null}
+                      {post.tags.length > 0 ? (
+                        <ul
+                          className="mt-3 flex flex-wrap gap-2"
+                          aria-label="Tags"
                         >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
-                  </a>
-                </li>
-              ))}
-            </ul>
+                          {post.tags.map((tag) => (
+                            <li
+                              key={tag}
+                              className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
+                            >
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+                No posts yet.
+              </p>
+            )}
           </section>
         </main>
       </div>
