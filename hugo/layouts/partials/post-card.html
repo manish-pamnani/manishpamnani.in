@@ -1,0 +1,28 @@
+<article class="post-card">
+  <a href="{{ .RelPermalink }}" class="post-card-cover">
+    {{- with .Params.coverImage -}}
+      <img src="{{ . | relURL }}" alt="">
+    {{- else -}}
+      <div style="width:100%;height:100%;background:var(--border);"></div>
+    {{- end -}}
+  </a>
+  <div class="post-card-body">
+    <time class="post-card-meta" datetime="{{ .Date.Format "2006-01-02" }}">
+      {{ .Date.Format "January 2, 2006" }}
+    </time>
+    <h2 class="post-card-title">
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </h2>
+    {{- with .Description -}}
+      <p class="post-card-excerpt">{{ . }}</p>
+    {{- end -}}
+    {{- with .Params.tags -}}
+      <div class="tag-list">
+        {{- range . -}}
+          <a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+        {{- end -}}
+      </div>
+    {{- end -}}
+    <a class="read-more" href="{{ .RelPermalink }}">Read article →</a>
+  </div>
+</article>

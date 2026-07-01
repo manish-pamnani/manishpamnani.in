@@ -1,0 +1,35 @@
+{{ define "main" }}
+  <article class="article-shell">
+    <a class="back-link" href="{{ "/" | relURL }}">← Back to blog</a>
+
+    <header class="article-header">
+      {{- with .Params.tags -}}
+        <div class="tag-list">
+          {{- range . -}}
+            <a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+          {{- end -}}
+        </div>
+      {{- end -}}
+
+      <h1 class="article-title">{{ .Title }}</h1>
+
+      <time class="article-date" datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "January 2, 2006" }}
+      </time>
+
+      {{- with .Description -}}
+        <p class="article-description">{{ . }}</p>
+      {{- end -}}
+
+      {{- with .Params.coverImage -}}
+        <div class="article-cover">
+          <img src="{{ . | relURL }}" alt="">
+        </div>
+      {{- end -}}
+    </header>
+
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </article>
+{{ end }}

@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <main class="site-shell">
+    <a class="back-link" href="/">← Back home</a>
+    <p class="eyebrow">Blog</p>
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{- with .Params.description -}}
+      <p class="page-lead">{{ . }}</p>
+    {{- end -}}
+
+    {{- $posts := where .Site.RegularPages "Section" "posts" -}}
+  {{- if $posts -}}
+      <section class="post-grid">
+        {{- range $posts.ByDate.Reverse -}}
+          {{ partial "post-card.html" . }}
+        {{- end -}}
+      </section>
+    {{- else -}}
+      <p class="empty-state">No posts yet. Add Markdown files to <code>hugo/content/posts/</code>.</p>
+    {{- end -}}
+  </main>
+{{ end }}

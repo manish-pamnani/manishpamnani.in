@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <main class="site-shell">
+    <a class="back-link" href="/">← Back home</a>
+    <p class="eyebrow">Blog</p>
+    <h1 class="page-title">{{ .Title }}</h1>
+    {{- with .Params.description -}}
+      <p class="page-lead">{{ . }}</p>
+    {{- end -}}
+
+    {{- $posts := .Pages.ByDate.Reverse -}}
+    {{- if $posts -}}
+      <section class="post-grid">
+        {{- range $posts -}}
+          {{ partial "post-card.html" . }}
+        {{- end -}}
+      </section>
+    {{- else -}}
+      <p class="empty-state">No posts in this section yet.</p>
+    {{- end -}}
+  </main>
+{{ end }}

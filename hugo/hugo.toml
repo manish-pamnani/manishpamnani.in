@@ -1,0 +1,24 @@
+baseURL = "https://manishpamnani.in/blogs/"
+locale = "en-us"
+title = "Manish Pamnani"
+enableRobotsTXT = true
+pygmentsCodeFences = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[params]
+  description = "Articles on engineering, product, and building on the web."
+  author = "Manish Pamnani"
+
+[permalinks]
+  posts = "/:slug/"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  tag = "tags"

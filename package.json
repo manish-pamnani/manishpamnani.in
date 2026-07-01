@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build:hugo": "hugo --gc --minify --cleanDestinationDir -s hugo -d ../public/blogs --baseURL https://manishpamnani.in/blogs/",
+    "build:hugo:dev": "hugo --gc --minify --cleanDestinationDir -s hugo -d ../public/blogs --baseURL http://localhost:3000/blogs/",
+    "dev:hugo": "hugo -s hugo -d ../public/blogs --baseURL http://localhost:3000/blogs/ --watch",
+    "predev": "npm run build:hugo:dev",
+    "prebuild": "npm run build:hugo",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -20,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "hugo-extended": "^0.163.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
