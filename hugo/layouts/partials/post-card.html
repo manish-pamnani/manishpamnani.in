@@ -1,7 +1,7 @@
 <article class="post-card">
   <a href="{{ .RelPermalink }}" class="post-card-cover">
     {{- with .Params.coverImage -}}
-      <img src="{{ . | relURL }}" alt="">
+      <img src="{{ . | relURL }}" alt="{{ $.Params.coverImageAlt | default $.Title }}">
     {{- else -}}
       <div style="width:100%;height:100%;background:var(--border);"></div>
     {{- end -}}
@@ -15,13 +15,6 @@
     </h2>
     {{- with .Description -}}
       <p class="post-card-excerpt">{{ . }}</p>
-    {{- end -}}
-    {{- with .Params.tags -}}
-      <div class="tag-list">
-        {{- range . -}}
-          <a class="tag" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
-        {{- end -}}
-      </div>
     {{- end -}}
     <a class="read-more" href="{{ .RelPermalink }}">Read article →</a>
   </div>

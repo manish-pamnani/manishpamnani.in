@@ -6,7 +6,6 @@ export type BlogPost = {
   slug: string;
   date: Date;
   description: string;
-  tags: string[];
   href: string;
 };
 
@@ -82,7 +81,6 @@ export function getBlogPosts(): BlogPost[] {
         slug,
         date: new Date(String(frontmatter.date ?? "")),
         description: String(frontmatter.description ?? ""),
-        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : [],
         href: `${BLOG_BASE}/${slug}/`,
       };
     });

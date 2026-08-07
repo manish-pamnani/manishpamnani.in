@@ -153,21 +153,6 @@ export default function Home() {
                           {post.description}
                         </p>
                       ) : null}
-                      {post.tags.length > 0 ? (
-                        <ul
-                          className="mt-3 flex flex-wrap gap-2"
-                          aria-label="Tags"
-                        >
-                          {post.tags.map((tag) => (
-                            <li
-                              key={tag}
-                              className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400"
-                            >
-                              {tag}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
                     </a>
                   </li>
                 ))}

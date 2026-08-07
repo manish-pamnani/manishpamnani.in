@@ -19,6 +19,3 @@ pygmentsCodeFences = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
-[taxonomies]
-  tag = "tags"

@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build:hugo": "hugo --gc --minify --cleanDestinationDir -s hugo -d ../public/blogs --baseURL https://manishpamnani.in/blogs/",
-    "build:hugo:dev": "hugo --gc --minify --cleanDestinationDir -s hugo -d ../public/blogs --baseURL http://localhost:3000/blogs/",
-    "dev:hugo": "hugo -s hugo -d ../public/blogs --baseURL http://localhost:3000/blogs/ --watch",
+    "build:hugo:dev": "hugo --gc --minify --cleanDestinationDir -s hugo -d ../public/blogs --baseURL http://localhost:3000/blogs/ --buildFuture",
+    "dev:hugo": "hugo -s hugo -d ../public/blogs --baseURL http://localhost:3000/blogs/ --watch --buildFuture",
     "predev": "npm run build:hugo:dev",
     "prebuild": "npm run build:hugo",
     "dev": "next dev",

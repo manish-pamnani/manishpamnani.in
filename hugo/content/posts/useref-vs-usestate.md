@@ -1,13 +1,10 @@
 ---
 title: "useRef vs useState: The Ultimate React Hooks Showdown"
 slug: "useref-vs-usestate"
-date: 2026-07-14
+date: 2026-08-11
 description: "A no-BS comparison of useRef and useState — what each hook is for, their real-world trade-offs, and dead-simple rules for picking the right one."
-tags:
-  - React
-  - Hooks
-  - useRef
-  - useState
+coverImage: "images/useref-vs-usestate.png"
+coverImageAlt: "useRef vs useState"
 ---
 
 By definition, [`useRef`](https://react.dev/reference/react/useRef) is a built-in feature that provides a way to store a mutable value that persists across component re-renders without triggering a re-render. Now imagine a situation where you're tracking the previous values of a counter in real-time, and you want it fast and you want it to happen smoothly without your UI flickering on every update.
@@ -31,7 +28,7 @@ Think of it as your no-BS React hook cheat sheet for:
 
 ## useState: The Drama Queen Who Steals Every Spotlight
 
-`useState` is React's built-in hook that craves attention with every update, forcing a re-render without actually thinking about whether it's required or not. A state generally refers to a piece of data or a certain set of properties that needs to be tracked in an application. For example, if you want to track the number of times a button is clicked, a state variable will help you do that.
+[`useState`](https://react.dev/reference/react/useState) is React's built-in hook that craves attention with every update, forcing a re-render without actually thinking about whether it's required or not. A state generally refers to a piece of data or a certain set of properties that needs to be tracked in an application. For example, if you want to track the number of times a button is clicked, a state variable will help you do that.
 
 Here's an example for the same:
 
@@ -76,15 +73,17 @@ While you may think of using `useState` for updating every other state in your R
 
   This is somewhat workable for small forms, but once your component structure grows, tracking all these updates and handlers becomes a nightmare.
 
-- **State resets on unmount.** When a component unmounts, all the state inside its `useState` calls resets, meaning you can't hold onto data forever when you navigate to a different component. If you want the data to persist even after unmounting, you'll need to lift it up to a parent component, store it outside React (like `localStorage`), or use an external state management library like [Redux](/blogs/zustand-vs-redux-2026/).
+- **State resets on unmount.** When a component unmounts, all the state inside its `useState` calls resets, meaning you can't hold onto data forever when you navigate to a different component. If you want the data to persist even after unmounting, you'll need to lift it up to a parent component, store it outside React (like `localStorage`), or use an external state management library like [Redux](/blogs/zustand-vs-redux-2026/).  
 
-  Although using a library won't harm you, it will ultimately increase your coding time to implement a simple, thorough change.
+Although using a library won't harm you, it will ultimately increase your coding time to implement a simple, thorough change.
 
 ## useRef: The Silent Ninja That Works Behind the Scenes
 
 Now it's time for our next champion, `useRef`, the complete opposite of `useState`. While `useState` unnecessarily renders everything, `useRef` handles everything subtly and quietly.
 
-`useRef` is a React hook that creates a mutable object with a `.current` property. The `.current` property helps you store any value — numbers, strings, DOM elements, objects, functions, you name it, `useRef` has got it. That's not it, you can also change `.current` anytime, and it won't unnecessarily re-render your component. A quick example to sum up how it works:
+{{< youtube wP3DRMlOJR4 >}}
+
+[`useRef`](https://react.dev/reference/react/useRef) is a React hook that creates a mutable object with a `.current` property. The `.current` property helps you store any value — numbers, strings, DOM elements, objects, functions, you name it, `useRef` has got it. That's not it, you can also change `.current` anytime, and it won't unnecessarily re-render your component. A quick example to sum up how it works:
 
 ```jsx
 import { useRef } from 'react';
@@ -128,7 +127,7 @@ While it may seem like `useRef` can be a perfect solution every time you encount
 
   To avoid this, always remember to clean up refs inside a `useEffect` cleanup function.
 
-- **Can't use in dependencies.** Since refs don't trigger re-renders, functions using `ref.current` can hold stale values if not handled carefully. This happens because JavaScript closures capture the value of `ref.current` at the time the function is created, not when it's called. Even though `ref.current` can change later during code execution, the closure won't "know" about it until you access it dynamically.
+- **Can't use in dependencies.** Since refs don't trigger re-renders, functions using [`ref.current`](https://react.dev/learn/referencing-values-with-refs) can hold stale values if not handled carefully. This happens because JavaScript closures capture the value of `ref.current` at the time the function is created, not when it's called. Even though `ref.current` can change later during code execution, the closure won't "know" about it until you access it dynamically.
 
   A simple fix here is to always read `ref.current` inside the event handler, and never store it in state or closures.
 
@@ -139,9 +138,7 @@ And there you have it, the ultimate `useRef` vs `useState` showdown!
 The simple truth:
 
 - **useState:** Use it when you want to reflect updates instantly — showing a counter value, updating from inputs as the user types, toggling UI elements (like modals, menu dropdowns, or switching between dark and light mode), or rendering filtered/sorted lists based on user actions.
-- **useRef:** Use it when you want to store or access values without triggering a re-render — focusing or scrolling to a DOM element, managing timers or intervals (start/stop/reset), keeping track of previous state or prop values, or holding mutable flags and instance-like variables that your event handlers need but your UI doesn't directly display.
-
-A 10-second rule: if you can decide something in under ten seconds using a simple mental check, decide and move on instead of overthinking it. For `useState` vs `useRef`, the rule looks like this:
+- **useRef:** Use it when you want to store or access values without triggering a re-render — focusing or scrolling to a DOM element, managing timers or intervals (start/stop/reset), keeping track of previous state or prop values, or holding mutable flags and instance-like variables that your event handlers need but your UI doesn't directly display. A 10-second rule: if you can decide something in under ten seconds using a simple mental check, decide and move on instead of overthinking it. For `useState` vs `useRef`, the rule looks like this:
 
 1. Does this value need to show up in the JSX or change the UI? Yes, then pick `useState` and move on.
 2. Does this value need to be stored or accessed in the background (like a DOM node, timer ID, previous value, or a simple flag) without triggering a re-render? Then pick `useRef` and move on.
