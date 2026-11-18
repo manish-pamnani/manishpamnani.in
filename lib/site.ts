@@ -13,7 +13,35 @@ export const site = {
     x: "https://x.com/imanishpamnani",
     blog: "/blogs/",
   },
+  email: "manishpamnani169@gmail.com",
 } as const;
+
+export const work = [
+  {
+    name: "Hosted Seats, Coca-Cola (contract)",
+    description:
+      "VIP guest management and CRM for FIFA, the Olympics and Coachella.",
+  },
+  {
+    name: "Zeus, Legends",
+    description:
+      "Inventory and ticketing running live across FIFA World Cup venues, plus VIP hospitality for the 2023 US Open Golf.",
+  },
+  {
+    name: "SIDEARM Sports",
+    description:
+      "Cut the JavaScript bundle by 30% and fixed Core Web Vitals across NCAA client sites.",
+  },
+  {
+    name: "HandWrought",
+    description: "An AI writing editor that edits in place, no copy-paste.",
+    href: "https://handwrought.online",
+  },
+] as const satisfies readonly {
+  name: string;
+  description: string;
+  href?: string;
+}[];
 
 export const skills = [
   "React",

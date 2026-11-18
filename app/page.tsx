@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SiteLogo } from "@/components/site-logo";
 import { formatBlogDate, getBlogPosts } from "@/lib/blog";
-import { personSchema, site, skills } from "@/lib/site";
+import { personSchema, site, skills, work } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: site.pageTitle,
@@ -32,7 +32,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
 
-      <div className="mx-auto w-full max-w-3xl flex-1 px-6 pb-16 pt-10 sm:px-8 sm:pb-24">
+      <div className="mx-auto w-full max-w-[760px] flex-1 px-6 pb-16 pt-10 sm:px-8 sm:pb-24">
         <header className="mb-16">
           <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-center">
             <SiteLogo size="lg" />
@@ -46,8 +46,9 @@ export default function Home() {
             </div>
           </div>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            I build polished, performant interfaces with React and Next.js — from
-            product dashboards to marketing sites that ship fast and scale cleanly.
+            I build front-end for products that have to work live: guest
+            management and ticketing for FIFA, the Olympics and the US Open, and
+            now an AI writing editor I built end to end.
           </p>
           <nav
             className="mt-8 flex flex-wrap gap-4 text-sm font-medium"
@@ -84,9 +85,65 @@ export default function Home() {
               Blog
             </a>
           </nav>
+          <p className="mt-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+            Available for contract and full-time front-end work, 40 hours a week,
+            remote from Jaipur.{" "}
+            <a
+              href={`mailto:${site.email}`}
+              className="font-medium text-zinc-950 underline-offset-4 hover:underline dark:text-zinc-50"
+            >
+              {site.email}
+            </a>
+          </p>
         </header>
 
         <main className="space-y-16">
+          <section aria-labelledby="work-heading">
+            <h2
+              id="work-heading"
+              className="text-sm font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400"
+            >
+              Work
+            </h2>
+            <ul className="mt-4 space-y-3 text-base leading-7 text-zinc-600 dark:text-zinc-400">
+              {work.map((item) => (
+                <li key={item.name}>
+                  {"href" in item ? (
+                    <a
+                      href={item.href}
+                      className="font-bold text-zinc-950 underline underline-offset-4 dark:text-zinc-50"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.name}
+                    </a>
+                  ) : (
+                    <span className="font-bold text-zinc-950 dark:text-zinc-50">
+                      {item.name}
+                    </span>
+                  )}{" "}
+                  — {item.description}
+                </li>
+              ))}
+            </ul>
+            <figure className="mt-8">
+              <video
+                className="aspect-video w-full rounded-lg border border-zinc-200 bg-zinc-900 dark:border-zinc-800"
+                src="/videos/handwrought-streaming.mp4"
+                poster="/videos/handwrought-streaming-poster.jpg"
+                width={1280}
+                height={720}
+                controls
+                playsInline
+                preload="none"
+                aria-label="HandWrought demo: AI edits streaming into the document in place"
+              />
+              <figcaption className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+                HandWrought streaming edits into a document in place.
+              </figcaption>
+            </figure>
+          </section>
+
           <section aria-labelledby="about-heading">
             <h2
               id="about-heading"
@@ -96,7 +153,7 @@ export default function Home() {
             </h2>
             <div className="mt-4 space-y-4 text-base leading-7 text-zinc-600 dark:text-zinc-400">
               <p>
-                I&apos;m a frontend engineer based in Jaipur with eight years of
+                I&apos;m a frontend engineer based in Jaipur with seven years of
                 experience shipping React and Next.js applications for startups and
                 product teams. I care about clear UX, maintainable code, and the
                 details that make interfaces feel fast.
