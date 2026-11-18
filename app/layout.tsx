@@ -61,12 +61,6 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <a
-          href="/"
-          className="mx-auto block w-full max-w-3xl px-6 pt-8 text-sm font-medium text-zinc-950 dark:text-zinc-50 sm:px-8"
-        >
-          {site.name}
-        </a>
         {children}
       </body>
     </html>
